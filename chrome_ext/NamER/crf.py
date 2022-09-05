@@ -262,6 +262,7 @@ def perform_inference(text, crf1, crf2):
             crf2: CRF2 model
     
     output: dict of results, format- Category: [(word1,sentence number, word number of that sentence), (word2, sentence number...)]
+            Note that results are 1 indexed for the sake of readability in the chrome extension
 
     """
     out = {"People":[], "Locations":[], "Organizations": [], "Other": []}
@@ -270,13 +271,13 @@ def perform_inference(text, crf1, crf2):
     for i in range(len(pred)):
         for j in range(len(pred[i])):
             if "PER" in pred[i][j]:
-                out["People"].append((data[i][j]["word"], i, j))
+                out["People"].append((data[i][j]["word"], i+1, j+1))
             elif "LOC" in pred[i][j]:
-                out["Locations"].append((data[i][j]["word"], i, j))
+                out["Locations"].append((data[i][j]["word"], i+1, j+1))
             elif "ORG" in pred[i][j]:
-                out["Organizations"].append((data[i][j]["word"], i, j))
+                out["Organizations"].append((data[i][j]["word"], i+1, j+1))
             elif "MISC" in pred[i][j]:
-                out["Other"].append((data[i][j]["word"], i, j))
+                out["Other"].append((data[i][j]["word"], i+1, j+1))
     return out
 
     

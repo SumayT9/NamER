@@ -1,0 +1,17 @@
+{
+    "name": "NamER",
+    "description": "Extracts Named Entities from Text",
+    "version": "1.0",
+    "manifest_version": 3,
+    "content_security_policy": {
+        "script-src" : ["self", "https://ajax.googleapis.com/"]
+    },
+    "background": {
+      "service_worker": "background.js"
+    },
+    "permissions": ["storage", "activeTab", "scripting"],
+    "host_permissions": ["http://127.0.0.1:8000/*"],
+    "action": {
+      "default_popup": "popup.html"
+    }
+}
